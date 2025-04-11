@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import './App.css'
 
 function App() {
@@ -6,6 +6,9 @@ function App() {
   const [numberAllowed, setNumberAllowed] = useState(false)
   const [charAllowed, setcharAllowed] = useState(false)
   const [password, setpassword] = useState('')
+
+  const passwordRef = useRef(null)
+
 
   const passwordGenerator = useCallback(() => {
     let pass = ''
@@ -27,6 +30,14 @@ function App() {
 
   }, [length, numberAllowed, charAllowed, setpassword])
 
+  const copyPasswordToClipboard = useCallback(() =>{
+    passwordRef.current?.select()
+    passwordRef.current?.setSelectionRange(0, 20)
+    window.navigator.clipboard.writeText(password)
+  },
+)
+
+
   useEffect(() => {
     passwordGenerator()
   }, [length, numberAllowed, charAllowed, passwordGenerator])
@@ -41,9 +52,13 @@ function App() {
             value={password}
             className='outline-none w-full py-1 px-3 text-gray-600'
             placeholder='password'
-            readOnly />
+            readOnly 
+            ref={passwordRef}
+          />
 
-          <button className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>Copy</button>
+          <button
+          onClick={copyPasswordToClipboard}
+          className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>Copy</button>
 
         </div>
         <div className='flex justify-between items-center text-sm gap-x-4 mb-2'>
@@ -51,7 +66,7 @@ function App() {
             <input
               type="range"
               min={6}
-              max={100}
+              max={20}
               value={length}
               className='cursor-pointer'
               onChange={(e) => setLength(e.target.value)}
