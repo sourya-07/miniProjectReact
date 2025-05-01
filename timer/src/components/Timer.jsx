@@ -16,11 +16,11 @@ const Timer = () => {
 
   }, [])
 
-  
+
   const handelStop = () => {
     clearInterval(id)
   }
-  
+
 
 
   return (
