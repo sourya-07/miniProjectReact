@@ -30,12 +30,12 @@ function App() {
 
   }, [length, numberAllowed, charAllowed, setpassword])
 
-  const copyPasswordToClipboard = useCallback(() =>{
+  const copyPasswordToClipboard = useCallback(() => {
     passwordRef.current?.select()
     passwordRef.current?.setSelectionRange(0, 20)
     window.navigator.clipboard.writeText(password)
   },
-)
+  )
 
 
   useEffect(() => {
@@ -52,13 +52,13 @@ function App() {
             value={password}
             className='outline-none w-full py-1 px-3 text-gray-600'
             placeholder='password'
-            readOnly 
+            readOnly
             ref={passwordRef}
           />
 
           <button
-          onClick={copyPasswordToClipboard}
-          className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>Copy</button>
+            onClick={copyPasswordToClipboard}
+            className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'>Copy</button>
 
         </div>
         <div className='flex justify-between items-center text-sm gap-x-4 mb-2'>
