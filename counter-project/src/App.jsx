@@ -1,6 +1,4 @@
 import { useState } from 'react' // Hook comes from here !
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
